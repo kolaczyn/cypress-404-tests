@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "e2e": "cypress run"
+  },
   "devDependencies": {
     "cypress": "^10.4.0"
   }
