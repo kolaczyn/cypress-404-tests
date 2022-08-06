@@ -2,7 +2,7 @@
 
 describe("/szukaj", () => {
   it("check if no 404", () => {
-    cy.visit("https://www.rossmann.pl/szukaj");
+    cy.visitPage("/szukaj");
     cy.checkIfNo404();
     cy.contains("Wyniki wyszukiwania");
   });
