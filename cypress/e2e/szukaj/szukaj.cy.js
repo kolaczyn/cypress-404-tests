@@ -69,7 +69,7 @@ describe("/szukaj", () => {
     cy.contains("Może chodziło Ci o: krem").should("not.exist");
   });
 
-  it.only("handles no results", () => {
+  it("handles no results", () => {
     const INPUT_SELECTOR = ".modal-search__input.form-control";
 
     cy.contains("Szukaj produktów").click({ force: true });
