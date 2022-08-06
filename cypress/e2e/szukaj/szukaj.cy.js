@@ -68,4 +68,14 @@ describe("/szukaj", () => {
     cy.contains("Brak wyników dla: klem").should("not.exist");
     cy.contains("Może chodziło Ci o: krem").should("not.exist");
   });
+
+  it("handles no results", () => {
+    const INPUT_SELECTOR = ".modal-search__input.form-control";
+
+    cy.contains("Szukaj produktów").click({ force: true });
+    cy.get(INPUT_SELECTOR).type("spadochron{enter}");
+
+    cy.contains("Wyniki wyszukiwania: spadochron");
+    cy.contains("Brak wyników.");
+  });
 });
