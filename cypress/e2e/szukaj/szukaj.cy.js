@@ -14,7 +14,7 @@ describe("/szukaj", () => {
     cy.contains("Wyniki wyszukiwania");
   });
 
-  it.only("clicks the tabs", () => {
+  it("clicks the tabs", () => {
     // TODO remove classes selector and use e.g. data-cy="products-tab"
     const TAB_SELECTOR = ".types-filter__link";
     const RESULTS_SELECTOR = ".h4.fx";
@@ -31,11 +31,24 @@ describe("/szukaj", () => {
     cy.get(RESULTS_SELECTOR).contains(/wynik|wyniki|wyników/g);
   });
 
-  it.only("checks for filters", () => {
+  it("checks for filters", () => {
     ["Kategoria", "Polecane", "Przedział cenowy", "Marka"].forEach(
       (tabName) => {
         cy.get(".filter__name").contains(tabName);
       }
     );
+  });
+
+  it("finds krem", () => {
+    const INPUT_SELECTOR = ".modal-search__input.form-control";
+
+    cy.contains("Szukaj produktów").click({ force: true });
+    cy.get(INPUT_SELECTOR).type("krem{enter}");
+
+    cy.contains("Wyniki wyszukiwania: krem");
+    cy.contains("Wyczyść").click();
+
+    cy.contains("Wyniki wyszukiwania");
+    cy.contains("Wyniki wyszukiwania: krem").should("not.exist");
   });
 });
