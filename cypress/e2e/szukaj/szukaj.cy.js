@@ -46,9 +46,26 @@ describe("/szukaj", () => {
     cy.get(INPUT_SELECTOR).type("krem{enter}");
 
     cy.contains("Wyniki wyszukiwania: krem");
+
+    cy.contains("Wyczyść").click();
+    cy.contains("Wyniki wyszukiwania");
+    cy.contains("Wyniki wyszukiwania: krem").should("not.exist");
+  });
+
+  it("handles autocomplete", () => {
+    const INPUT_SELECTOR = ".modal-search__input.form-control";
+
+    cy.contains("Szukaj produktów").click({ force: true });
+    cy.get(INPUT_SELECTOR).type("klem{enter}");
+
+    cy.contains("Brak wyników dla: klem");
+    cy.contains("Może chodziło Ci o: krem");
+
     cy.contains("Wyczyść").click();
 
     cy.contains("Wyniki wyszukiwania");
-    cy.contains("Wyniki wyszukiwania: krem").should("not.exist");
+
+    cy.contains("Brak wyników dla: klem").should("not.exist");
+    cy.contains("Może chodziło Ci o: krem").should("not.exist");
   });
 });
