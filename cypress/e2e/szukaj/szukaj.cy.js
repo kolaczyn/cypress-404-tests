@@ -69,13 +69,13 @@ describe("/szukaj", () => {
     cy.contains("Może chodziło Ci o: krem").should("not.exist");
   });
 
-  it("handles no results", () => {
+  it.only("handles no results", () => {
     const INPUT_SELECTOR = ".modal-search__input.form-control";
 
     cy.contains("Szukaj produktów").click({ force: true });
     cy.get(INPUT_SELECTOR).type("spadochron{enter}");
 
-    cy.contains("Wyniki wyszukiwania: spadochron");
+    cy.contains("Wyniki wyszukiwania: spadochron", { timeout: 5500 });
     cy.contains("Brak wyników.");
   });
 });
